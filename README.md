@@ -5,11 +5,15 @@
 [![License](https://img.shields.io/cocoapods/l/HUDHelper.svg?style=flat)](http://cocoapods.org/pods/HUDHelper)
 [![Platform](https://img.shields.io/cocoapods/p/HUDHelper.svg?style=flat)](http://cocoapods.org/pods/HUDHelper)
 
+
+
+> HUDHelper defines 'Indicator' and 'Toast' based on MBProgressHUD, the indicator acts as the default behaviour of MBProgressHUD, the toast will hide automatically.
+>
+> The original intention of this wrapper is to separate the MBProgressHUD usage from UIViewController and call it easily.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 
@@ -22,7 +26,7 @@ pod "HUDHelper"
 
 ## Author
 
-Wei Han, xingheng907@hotmail.com
+Will Han, xingheng.hax@qq.com
 
 ## License
 
