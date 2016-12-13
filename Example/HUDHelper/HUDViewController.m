@@ -17,13 +17,67 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    self.title = @"HUDHelper Demo";
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    [self _buildSubview:self.view];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Action
+
+- (void)btnToastTapped:(id)sender
+{
+    NSTimeInterval delay = 3;
+    NSString *strSubTitle = [NSString stringWithFormat:@"The toast will dismiss automatically after %.0f second(s).", delay];
+
+    HUDToast(self.view).title(@"Got response successfully!").subTitle(strSubTitle).delay(delay).show();
+}
+
+- (void)btnIndicatorTapped:(id)sender
+{
+    HUDIndicator(self.view).title(@"Processing").subTitle(@"The indicator won't dismiss automatically, you should hide it manually. (At this time, it will dismiss when the dummy network request finished.)").show();
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        sleep(10); // To simulate the (netowrk) processing.
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            HUDHide(self.view);
+        });
+    });
+}
+
+#pragma mark - Private
+
+- (void)_buildSubview:(UIView *)containerView
+{
+    UIButton *btnToast = [UIButton buttonWithType:UIButtonTypeSystem];
+
+    [btnToast setTitle:@"Show Toast" forState:UIControlStateNormal];
+    [btnToast addTarget:self action:@selector(btnToastTapped:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *btnIndicator = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnIndicator setTitle:@"Show Indicator" forState:UIControlStateNormal];
+    [btnIndicator addTarget:self action:@selector(btnIndicatorTapped:) forControlEvents:UIControlEventTouchUpInside];
+
+    [containerView addSubview:btnToast];
+    [containerView addSubview:btnIndicator];
+
+    [btnToast mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(containerView.centerX);
+        make.centerY.equalTo(containerView.centerY).multipliedBy(2.0 / 3.0);
+    }];
+
+    [btnIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(containerView.centerX);
+        make.centerY.equalTo(containerView.centerY).multipliedBy(3.0 / 2.0);
+    }];
 }
 
 @end

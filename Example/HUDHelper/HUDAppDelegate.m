@@ -7,12 +7,21 @@
 //
 
 #import "HUDAppDelegate.h"
+#import "HUDViewController.h"
 
 @implementation HUDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    HUDViewController *vc = [HUDViewController new];
+    UINavigationController *naviController = [[UINavigationController alloc] initWithRootViewController:vc];
+
+    self.window.rootViewController = naviController;
+
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
