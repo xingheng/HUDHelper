@@ -9,34 +9,23 @@
 Pod::Spec.new do |s|
   s.name             = 'HUDHelper'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of HUDHelper.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'A wrapper of method chaining for MBProgressHUD.'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+HUDHelper defines 'Indicator' and 'Toast' based on MBProgressHUD, the indicator acts as the default behaviour of MBProgressHUD, the toast will hide automatically.
+The original intention of this wrapper is to separate the MBProgressHUD usage from UIViewController and call it easily.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/HUDHelper'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/xingheng/HUDHelper'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Wei Han' => 'xingheng907@hotmail.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/HUDHelper.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { 'Will Han' => 'xingheng.hax@qq.com' }
+  s.source           = { :git => 'https://github.com/xingheng/HUDHelper.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'HUDHelper/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'HUDHelper' => ['HUDHelper/Assets/*.png']
-  # }
+  s.source_files = 'HUDHelper/**/*'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.public_header_files = 'HUDHelper/HUDHelper.h'
+  s.frameworks = 'UIKit'
+  s.dependency 'MBProgressHUD', '> 0.9'
 end

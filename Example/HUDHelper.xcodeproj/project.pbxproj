@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		53624996033E131D1827C625 /* Pods_HUDHelper_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B216CC37A615481553C18DCF /* Pods_HUDHelper_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -22,7 +21,8 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		FDC6B761F1A55FD5A6F92276 /* Pods_HUDHelper_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD092BCC98C96500D7B7C781 /* Pods_HUDHelper_Tests.framework */; };
+		97840C4B823A19CE8BD01BBA /* libPods-HUDHelper_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D43A63EB360C5A3A655AE0A1 /* libPods-HUDHelper_Example.a */; };
+		FFAD5F0E99E15DE756EEDE9C /* libPods-HUDHelper_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D618F3E1E50242ADFA27C31 /* libPods-HUDHelper_Tests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,11 +60,11 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		897CA9F8A8C6A7BD69ADCAAA /* Pods-HUDHelper_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HUDHelper_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HUDHelper_Example/Pods-HUDHelper_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3776B74CA7ABA50D7A3F36 /* Pods-HUDHelper_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HUDHelper_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HUDHelper_Tests/Pods-HUDHelper_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		9E8DBD9F019AC037351053B1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		B216CC37A615481553C18DCF /* Pods_HUDHelper_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HUDHelper_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B89697300BAF0ED9549988CA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		BD092BCC98C96500D7B7C781 /* Pods_HUDHelper_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HUDHelper_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE69B037950EB5108CA89728 /* HUDHelper.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = HUDHelper.podspec; path = ../HUDHelper.podspec; sourceTree = "<group>"; };
+		9D618F3E1E50242ADFA27C31 /* libPods-HUDHelper_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HUDHelper_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E8DBD9F019AC037351053B1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		B89697300BAF0ED9549988CA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		BE69B037950EB5108CA89728 /* HUDHelper.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HUDHelper.podspec; path = ../HUDHelper.podspec; sourceTree = "<group>"; };
+		D43A63EB360C5A3A655AE0A1 /* libPods-HUDHelper_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HUDHelper_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				53624996033E131D1827C625 /* Pods_HUDHelper_Example.framework in Frameworks */,
+				97840C4B823A19CE8BD01BBA /* libPods-HUDHelper_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +86,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				FDC6B761F1A55FD5A6F92276 /* Pods_HUDHelper_Tests.framework in Frameworks */,
+				FFAD5F0E99E15DE756EEDE9C /* libPods-HUDHelper_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,8 +121,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				B216CC37A615481553C18DCF /* Pods_HUDHelper_Example.framework */,
-				BD092BCC98C96500D7B7C781 /* Pods_HUDHelper_Tests.framework */,
+				D43A63EB360C5A3A655AE0A1 /* libPods-HUDHelper_Example.a */,
+				9D618F3E1E50242ADFA27C31 /* libPods-HUDHelper_Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -244,7 +244,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = HUD;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Wei Han";
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
@@ -447,14 +447,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -487,13 +492,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

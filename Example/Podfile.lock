@@ -1,0 +1,19 @@
+PODS:
+  - HUDHelper (0.1.0):
+    - MBProgressHUD (> 0.9)
+  - MBProgressHUD (1.0.0)
+
+DEPENDENCIES:
+  - HUDHelper (from `../`)
+
+EXTERNAL SOURCES:
+  HUDHelper:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  HUDHelper: 3c7fd25d0417720e7db764954b70e6e9a0d267cf
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+
+PODFILE CHECKSUM: d7db39af7206669f8b2665a43d86c12571ac7c7f
+
+COCOAPODS: 1.1.1

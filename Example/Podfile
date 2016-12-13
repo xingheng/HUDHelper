@@ -1,11 +1,8 @@
-use_frameworks!
 
 target 'HUDHelper_Example' do
   pod 'HUDHelper', :path => '../'
 
   target 'HUDHelper_Tests' do
     inherit! :search_paths
-
-    
   end
 end
