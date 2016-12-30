@@ -210,13 +210,20 @@ HUDHelper * HUDIndicatorInWindow()
     return HUDIndicator(kROOTVIEW_WINDOW);
 }
 
-void HUDHideAnimated(UIView *view, BOOL animated)
+void HUDHideWhen(BOOL animated, BOOL (^condition)(HUDHelper *hud))
 {
     for (HUDHelper *hud in allHUDs) {
-        if ([hud.superview isEqual:view]) {
+        if (condition(hud)) {
             hud.animation(animated).hide();
         }
     }
+}
+
+void HUDHideAnimated(UIView *view, BOOL animated)
+{
+    HUDHideWhen(animated, ^BOOL (HUDHelper *hud) {
+        return [hud.superview isEqual:view];
+    });
 }
 
 void HUDHide(UIView *view)
@@ -234,9 +241,23 @@ void HUDHideInWindow()
     HUDHideInWindowAnimated(YES);
 }
 
+void HUDHideAllToasts(BOOL animated)
+{
+    HUDHideWhen(animated, ^BOOL (HUDHelper *hud) {
+        return !hud.isIndicator;
+    });
+}
+
+void HUDHideAllIndicators(BOOL animated)
+{
+    HUDHideWhen(animated, ^BOOL (HUDHelper *hud) {
+        return hud.isIndicator;
+    });
+}
+
 void HUDHideAll(BOOL animated)
 {
-    for (HUDHelper *hud in allHUDs) {
-        hud.animation(animated).hide();
-    }
+    HUDHideWhen(animated, ^BOOL (HUDHelper *hud) {
+        return YES;
+    });
 }

@@ -60,4 +60,8 @@ void HUDHideInWindowAnimated(BOOL animated);
 
 void HUDHideInWindow();
 
+void HUDHideAllToasts(BOOL animated);
+
+void HUDHideAllIndicators(BOOL animated);
+
 void HUDHideAll(BOOL animated);
