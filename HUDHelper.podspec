@@ -27,5 +27,5 @@ The original intention of this wrapper is to separate the MBProgressHUD usage fr
 
   s.public_header_files = 'HUDHelper/HUDHelper.h'
   s.frameworks = 'UIKit'
-  s.dependency 'MBProgressHUD', '> 0.9'
+  s.dependency 'MBProgressHUD', '~> 1.0'
 end

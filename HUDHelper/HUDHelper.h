@@ -39,35 +39,6 @@
 
 - (HUDHelper *(^)(UIView *))setCustomView;
 
-
-#pragma mark - DEPRECATED METHODS
-
-#pragma mark - Indicator
-
-+ (MBProgressHUD *)showIndicatorToView:(UIView *)view DEPRECATED_ATTRIBUTE;
-
-+ (MBProgressHUD *)showIndicatorToView:(UIView *)view text:(NSString *)text DEPRECATED_ATTRIBUTE;
-
-+ (MBProgressHUD *)showHUDIndicatorInWindow DEPRECATED_ATTRIBUTE;
-
-#pragma mark - HUD
-
-+ (MBProgressHUD *)showHUDInView:(UIView *)view text:(NSString *)text DEPRECATED_ATTRIBUTE;
-
-+ (MBProgressHUD *)showHUDInView:(UIView *)view text:(NSString *)text delay:(NSTimeInterval)delay DEPRECATED_ATTRIBUTE;
-
-+ (MBProgressHUD *)showHUDTextInWindow:(NSString *)text DEPRECATED_ATTRIBUTE;
-
-+ (void)showHUDInView:(UIView *)view completedText:(NSString *)text DEPRECATED_ATTRIBUTE;
-
-#pragma mark - hidden
-
-+ (void)hideHUDInView:(UIView *)view completedText:(NSString *)text DEPRECATED_ATTRIBUTE;
-
-+ (void)hideHUDForView:(UIView *)view DEPRECATED_ATTRIBUTE;
-
-+ (void)hideHUDForWindow DEPRECATED_ATTRIBUTE;
-
 @end
 
 
@@ -88,3 +59,5 @@ void HUDHideAnimated(UIView *view, BOOL animated);
 void HUDHideInWindowAnimated(BOOL animated);
 
 void HUDHideInWindow();
+
+void HUDHideAll(BOOL animated);

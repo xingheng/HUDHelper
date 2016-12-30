@@ -10,7 +10,10 @@
 
 #define kROOTVIEW_WINDOW [UIApplication sharedApplication].delegate.window.rootViewController.view
 
-@interface HUDHelper ()
+static NSMutableSet<HUDHelper *> *allHUDs;
+
+
+@interface HUDHelper () <MBProgressHUDDelegate>
 
 @property (nonatomic, assign) BOOL isIndicator;
 @property (nonatomic, assign) BOOL displayAnimated;
@@ -20,6 +23,14 @@
 @end
 
 @implementation HUDHelper
+
++ (void)initialize
+{
+    if (!allHUDs) {
+        allHUDs = [NSMutableSet new];
+    }
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
@@ -35,16 +46,18 @@
     return ^id () {
                self.removeFromSuperViewOnHide = YES;
                [self.containerView addSubview:self];
-               [self show:self.displayAnimated];
+               [self showAnimated:self.displayAnimated];
+
+               [allHUDs addObject:self];
 
                if (!self.isIndicator) {
                    NSTimeInterval delay = self.delayInterval;
 
                    if (delay <= 0) {
-                       delay = (self.labelText.length + self.detailsLabelText.length) * 0.2f;
+                       delay = (self.label.text.length + self.detailsLabel.text.length) * 0.2f;
                    }
 
-                   [self hide:self.displayAnimated afterDelay:delay];
+                   [self hideAnimated:self.displayAnimated afterDelay:delay];
                }
 
                return self;
@@ -54,7 +67,7 @@
 - (HUDHelper *(^)())hide
 {
     return ^id () {
-               [self hide:self.displayAnimated];
+               [self hideAnimated:self.displayAnimated];
                return self;
     };
 }
@@ -86,7 +99,7 @@
 - (HUDHelper *(^)(NSString *))title
 {
     return ^id (NSString *title) {
-               self.labelText = title;
+               self.label.text = title;
                self.mode = self.isIndicator ? MBProgressHUDModeIndeterminate : MBProgressHUDModeText;
                return self;
     };
@@ -95,7 +108,7 @@
 - (HUDHelper *(^)(UIFont *))titleFont
 {
     return ^id (UIFont *titleFont) {
-               self.labelFont = titleFont;
+               self.label.font = titleFont;
                return self;
     };
 }
@@ -103,7 +116,7 @@
 - (HUDHelper *(^)(UIColor *))titleColor
 {
     return ^id (UIColor *titleColor) {
-               self.labelColor = titleColor;
+               self.label.textColor = titleColor;
                return self;
     };
 }
@@ -111,7 +124,7 @@
 - (HUDHelper *(^)(NSString *))subTitle
 {
     return ^id (NSString *subTitle) {
-               self.detailsLabelText = subTitle;
+               self.detailsLabel.text = subTitle;
                self.mode = self.isIndicator ? MBProgressHUDModeIndeterminate : MBProgressHUDModeText;
                return self;
     };
@@ -120,7 +133,7 @@
 - (HUDHelper *(^)(UIFont *))subTitleFont
 {
     return ^id (UIFont *subTitleFont) {
-               self.detailsLabelFont = subTitleFont;
+               self.detailsLabel.font = subTitleFont;
                return self;
     };
 }
@@ -128,7 +141,7 @@
 - (HUDHelper *(^)(UIColor *))subTitleColor
 {
     return ^id (UIColor *subTitleColor) {
-               self.detailsLabelColor = subTitleColor;
+               self.detailsLabel.textColor = subTitleColor;
                return self;
     };
 }
@@ -152,87 +165,17 @@
 - (HUDHelper *(^)(UIView *))setCustomView
 {
     return ^id (UIView *customView) {
+               self.mode = MBProgressHUDModeCustomView;
                self.customView = customView;
                return self;
     };
 }
 
-#pragma mark - Indicator
+#pragma mark - MBProgressHUDDelegate
 
-+ (MBProgressHUD *)showIndicatorToView:(UIView *)view
+- (void)hudWasHidden:(MBProgressHUD *)hud
 {
-    return [MBProgressHUD showHUDAddedTo:view animated:YES];
-}
-
-+ (MBProgressHUD *)showIndicatorToView:(UIView *)view text:(NSString *)text
-{
-    MBProgressHUD *hud = [self showIndicatorToView:view];
-
-    hud.labelText = text;
-    hud.mode = MBProgressHUDModeIndeterminate;
-    return hud;
-}
-
-+ (MBProgressHUD *)showHUDIndicatorInWindow
-{
-    return [self showIndicatorToView:kROOTVIEW_WINDOW];
-}
-
-#pragma mark - HUD
-
-+ (MBProgressHUD *)showHUDInView:(UIView *)view text:(NSString *)text
-{
-    return [self showHUDInView:view text:text delay:text.length * 0.2f];
-}
-
-+ (MBProgressHUD *)showHUDInView:(UIView *)view text:(NSString *)text delay:(NSTimeInterval)delay
-{
-    MBProgressHUD *hud = [self showIndicatorToView:view];
-
-    hud.userInteractionEnabled = NO;
-    hud.labelText = text;
-    hud.mode = MBProgressHUDModeText;
-    hud.margin = 15.f;
-    [hud hide:YES afterDelay:delay];
-    return hud;
-}
-
-+ (MBProgressHUD *)showHUDTextInWindow:(NSString *)text
-{
-    return [self showHUDInView:kROOTVIEW_WINDOW text:text];
-}
-
-+ (void)showHUDInView:(UIView *)view completedText:(NSString *)text
-{
-    MBProgressHUD *hud = [self showIndicatorToView:view];
-
-    hud.userInteractionEnabled = NO;
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-    hud.mode = MBProgressHUDModeCustomView;
-    hud.labelText = text;
-    [hud hide:YES afterDelay:1];
-}
-
-#pragma mark - hidden
-
-+ (void)hideHUDInView:(UIView *)view completedText:(NSString *)text
-{
-    MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
-
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-    hud.mode = MBProgressHUDModeCustomView;
-    hud.labelText = text;
-    [hud hide:YES afterDelay:1];
-}
-
-+ (void)hideHUDForView:(UIView *)view
-{
-    [MBProgressHUD hideAllHUDsForView:view animated:YES];
-}
-
-+ (void)hideHUDForWindow
-{
-    [MBProgressHUD hideAllHUDsForView:kROOTVIEW_WINDOW animated:YES];
+    [allHUDs removeObject:(HUDHelper *)hud];
 }
 
 @end
@@ -269,7 +212,11 @@ HUDHelper * HUDIndicatorInWindow()
 
 void HUDHideAnimated(UIView *view, BOOL animated)
 {
-    [MBProgressHUD hideAllHUDsForView:view animated:animated];
+    for (HUDHelper *hud in allHUDs) {
+        if ([hud.superview isEqual:view]) {
+            hud.animation(animated).hide();
+        }
+    }
 }
 
 void HUDHide(UIView *view)
@@ -279,10 +226,17 @@ void HUDHide(UIView *view)
 
 void HUDHideInWindowAnimated(BOOL animated)
 {
-    [MBProgressHUD hideAllHUDsForView:kROOTVIEW_WINDOW animated:animated];
+    HUDHideAnimated(kROOTVIEW_WINDOW, animated);
 }
 
 void HUDHideInWindow()
 {
     HUDHideInWindowAnimated(YES);
+}
+
+void HUDHideAll(BOOL animated)
+{
+    for (HUDHelper *hud in allHUDs) {
+        hud.animation(animated).hide();
+    }
 }
