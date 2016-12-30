@@ -12,6 +12,8 @@
 
 static NSMutableSet<HUDHelper *> *allHUDs;
 
+static HUDHelperConfigurationHandler hudConfigurationHandler;
+
 
 @interface HUDHelper () <MBProgressHUDDelegate>
 
@@ -36,6 +38,8 @@ static NSMutableSet<HUDHelper *> *allHUDs;
     if (self = [super initWithFrame:frame]) {
         self.userInteractionEnabled = NO;
         self.displayAnimated = YES;
+
+        hudConfigurationHandler(self);
     }
 
     return self;
@@ -182,6 +186,11 @@ static NSMutableSet<HUDHelper *> *allHUDs;
 
 
 #pragma mark - Helper Functions
+
+void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler)
+{
+    hudConfigurationHandler = handler;
+}
 
 HUDHelper * HUDToast(UIView *view)
 {

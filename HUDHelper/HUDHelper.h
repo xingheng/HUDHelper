@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
+typedef void (*HUDHelperConfigurationHandler)(MBProgressHUD *);
+
+
 @interface HUDHelper : MBProgressHUD
 
 - (HUDHelper *(^)())show;
@@ -43,6 +46,8 @@
 
 
 #pragma mark - Helper Functions
+
+void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler);
 
 HUDHelper * HUDToast(UIView *view);
 

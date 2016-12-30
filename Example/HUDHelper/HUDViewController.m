@@ -8,6 +8,11 @@
 
 #import "HUDViewController.h"
 
+void CustomHUDConfigurationHandler(MBProgressHUD *hud)
+{
+    hud.bezelView.color = [UIColor lightGrayColor];
+}
+
 @interface HUDViewController ()
 
 @end
@@ -22,6 +27,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     [self _buildSubview:self.view];
+
+    SetupHUDHelperConfiguration(CustomHUDConfigurationHandler);
 }
 
 - (void)didReceiveMemoryWarning
