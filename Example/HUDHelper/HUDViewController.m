@@ -10,7 +10,13 @@
 
 void CustomHUDConfigurationHandler(MBProgressHUD *hud)
 {
-    hud.bezelView.color = [UIColor lightGrayColor];
+    hud.bezelView.color = [[UIColor grayColor] colorWithAlphaComponent:0.8];
+    hud.backgroundView.color = [[UIColor grayColor] colorWithAlphaComponent:0.2];
+
+    hud.contentColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+
+    hud.label.font = [UIFont boldSystemFontOfSize:14];
+    hud.detailsLabel.font = [[UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline] fontWithSize:11];
 }
 
 @interface HUDViewController ()
@@ -39,6 +45,11 @@ void CustomHUDConfigurationHandler(MBProgressHUD *hud)
 
 #pragma mark - Action
 
+- (void)hudActionButtonTapped:(id)sender
+{
+    HUDHide(self.view);
+}
+
 - (void)btnToastTapped:(id)sender
 {
     NSTimeInterval delay = 3;
@@ -49,7 +60,10 @@ void CustomHUDConfigurationHandler(MBProgressHUD *hud)
 
 - (void)btnIndicatorTapped:(id)sender
 {
-    HUDIndicator(self.view).title(@"Processing").subTitle(@"The indicator won't dismiss automatically, you should hide it manually. (At this time, it will dismiss when the dummy network request finished.)").show();
+    HUDIndicator(self.view).title(@"Processing").subTitle(@"The indicator won't dismiss automatically, you should hide it manually. (At this time, it will dismiss when the dummy network request finished.)").show().actionButton(^ (UIButton *button) {
+        [button setTitle:@"Dismiss" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(hudActionButtonTapped:) forControlEvents:UIControlEventAllEvents];
+    });
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         sleep(10); // To simulate the (netowrk) processing.

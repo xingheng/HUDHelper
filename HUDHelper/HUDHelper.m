@@ -166,6 +166,19 @@ static HUDHelperConfigurationHandler hudConfigurationHandler;
     };
 }
 
+- (HUDHelper *(^)(HUDHelperButtonActionBlock))actionButton
+{
+    return ^id (HUDHelperButtonActionBlock block) {
+               if (block) {
+                   self.userInteractionEnabled = YES;
+                   block(self.button);
+                   block = nil;
+               }
+
+               return self;
+    };
+}
+
 - (HUDHelper *(^)(UIView *))setCustomView
 {
     return ^id (UIView *customView) {
