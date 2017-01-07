@@ -39,7 +39,9 @@ static HUDHelperConfigurationHandler hudConfigurationHandler;
         self.userInteractionEnabled = NO;
         self.displayAnimated = YES;
 
-        hudConfigurationHandler(self);
+        if (hudConfigurationHandler) {
+            hudConfigurationHandler(self);
+        }
     }
 
     return self;
