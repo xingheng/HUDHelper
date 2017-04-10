@@ -256,7 +256,9 @@ HUDHelper * HUDIndicatorInWindow()
 
 void HUDHideWhen(BOOL animated, BOOL (^condition)(HUDHelper *hud))
 {
-    for (HUDHelper *hud in allHUDs) {
+    NSSet *set = [allHUDs copy];
+
+    for (HUDHelper *hud in set) {
         if (condition(hud)) {
             hud.animation(animated).hide();
         }
