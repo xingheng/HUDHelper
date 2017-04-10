@@ -190,6 +190,14 @@ static HUDHelperConfigurationHandler hudConfigurationHandler;
     };
 }
 
+#pragma mark - Override
+
+- (void)removeFromSuperview
+{
+    [allHUDs removeObject:self];
+    [super removeFromSuperview];
+}
+
 #pragma mark - MBProgressHUDDelegate
 
 - (void)hudWasHidden:(MBProgressHUD *)hud
