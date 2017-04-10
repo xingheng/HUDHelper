@@ -10,6 +10,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 
 typedef void (*HUDHelperConfigurationHandler)(MBProgressHUD *);
+typedef void (^HUDHelperConfigurationBlock)(MBProgressHUD *);
 typedef void (^HUDHelperButtonActionBlock)(UIButton *);
 
 
@@ -44,6 +45,8 @@ typedef void (^HUDHelperButtonActionBlock)(UIButton *);
 - (HUDHelper *(^)(HUDHelperButtonActionBlock))actionButton;
 
 - (HUDHelper *(^)(UIView *))setCustomView;
+
+- (HUDHelper *(^)(HUDHelperConfigurationBlock))customConfiguration;
 
 @end
 

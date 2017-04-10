@@ -190,6 +190,18 @@ static HUDHelperConfigurationHandler hudConfigurationHandler;
     };
 }
 
+- (HUDHelper *(^)(HUDHelperConfigurationBlock))customConfiguration
+{
+    return ^id (HUDHelperConfigurationBlock configBlock) {
+               if (configBlock) {
+                   configBlock(self);
+                   configBlock = nil;
+               }
+
+               return self;
+    };
+}
+
 #pragma mark - Override
 
 - (void)removeFromSuperview
