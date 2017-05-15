@@ -53,7 +53,7 @@ typedef void (^HUDHelperButtonActionBlock)(UIButton *);
 
 #pragma mark - Helper Functions
 
-void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler);
+void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler, UIWindow *containerWindow);
 
 HUDHelper * HUDToast(UIView *view);
 

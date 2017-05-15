@@ -34,7 +34,7 @@ void CustomHUDConfigurationHandler(MBProgressHUD *hud)
 
     [self _buildSubview:self.view];
 
-    SetupHUDHelperConfiguration(CustomHUDConfigurationHandler);
+    SetupHUDHelperConfiguration(CustomHUDConfigurationHandler, nil);
 }
 
 - (void)didReceiveMemoryWarning

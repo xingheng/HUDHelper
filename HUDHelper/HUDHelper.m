@@ -8,11 +8,12 @@
 
 #import "HUDHelper.h"
 
-#define kROOTVIEW_WINDOW [UIApplication sharedApplication].delegate.window.rootViewController.view
-
 static NSMutableSet<HUDHelper *> *allHUDs;
 
+static UIWindow *theWindow;
 static HUDHelperConfigurationHandler hudConfigurationHandler;
+
+UIWindow * GetTheWindow();
 
 
 @interface HUDHelper () <MBProgressHUDDelegate>
@@ -222,9 +223,15 @@ static HUDHelperConfigurationHandler hudConfigurationHandler;
 
 #pragma mark - Helper Functions
 
-void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler)
+void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler, UIWindow *containerWindow)
 {
     hudConfigurationHandler = handler;
+    theWindow = containerWindow;
+}
+
+UIWindow * GetTheWindow()
+{
+    return theWindow ? : [UIApplication sharedApplication].keyWindow;
 }
 
 HUDHelper * HUDToast(UIView *view)
@@ -237,7 +244,7 @@ HUDHelper * HUDToast(UIView *view)
 
 HUDHelper * HUDToastInWindow()
 {
-    return HUDToast(kROOTVIEW_WINDOW);
+    return HUDToast(GetTheWindow());
 }
 
 HUDHelper * HUDIndicator(UIView *view)
@@ -251,7 +258,7 @@ HUDHelper * HUDIndicator(UIView *view)
 
 HUDHelper * HUDIndicatorInWindow()
 {
-    return HUDIndicator(kROOTVIEW_WINDOW);
+    return HUDIndicator(GetTheWindow());
 }
 
 void HUDHideWhen(BOOL animated, BOOL (^condition)(HUDHelper *hud))
@@ -279,7 +286,7 @@ void HUDHide(UIView *view)
 
 void HUDHideInWindowAnimated(BOOL animated)
 {
-    HUDHideAnimated(kROOTVIEW_WINDOW, animated);
+    HUDHideAnimated(GetTheWindow(), animated);
 }
 
 void HUDHideInWindow()
