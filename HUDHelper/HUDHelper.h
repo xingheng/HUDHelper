@@ -16,9 +16,9 @@ typedef void (^HUDHelperButtonActionBlock)(UIButton *);
 
 @interface HUDHelper : MBProgressHUD
 
-- (HUDHelper *(^)())show;
+- (HUDHelper *(^)(void))show;
 
-- (HUDHelper *(^)())hide;
+- (HUDHelper *(^)(void))hide;
 
 - (HUDHelper *(^)(BOOL))animation;
 
@@ -57,11 +57,11 @@ void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler, UIWindow
 
 HUDHelper * HUDToast(UIView *view);
 
-HUDHelper * HUDToastInWindow();
+HUDHelper * HUDToastInWindow(void);
 
 HUDHelper * HUDIndicator(UIView *view);
 
-HUDHelper * HUDIndicatorInWindow();
+HUDHelper * HUDIndicatorInWindow(void);
 
 void HUDHide(UIView *view);
 
@@ -69,7 +69,7 @@ void HUDHideAnimated(UIView *view, BOOL animated);
 
 void HUDHideInWindowAnimated(BOOL animated);
 
-void HUDHideInWindow();
+void HUDHideInWindow(void);
 
 void HUDHideAllToasts(BOOL animated);
 

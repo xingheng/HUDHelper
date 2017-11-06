@@ -13,7 +13,7 @@ static NSMutableSet<HUDHelper *> *allHUDs;
 static UIWindow *theWindow;
 static HUDHelperConfigurationHandler hudConfigurationHandler;
 
-UIWindow * GetTheWindow();
+static UIWindow * GetTheWindow(void);
 
 
 @interface HUDHelper () <MBProgressHUDDelegate>
@@ -48,7 +48,7 @@ UIWindow * GetTheWindow();
     return self;
 }
 
-- (HUDHelper *(^)())show
+- (HUDHelper *(^)(void))show
 {
     return ^id () {
                self.removeFromSuperViewOnHide = YES;
@@ -71,7 +71,7 @@ UIWindow * GetTheWindow();
     };
 }
 
-- (HUDHelper *(^)())hide
+- (HUDHelper *(^)(void))hide
 {
     return ^id () {
                [self hideAnimated:self.displayAnimated];
@@ -229,7 +229,7 @@ void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler, UIWindow
     theWindow = containerWindow;
 }
 
-UIWindow * GetTheWindow()
+static UIWindow * GetTheWindow(void)
 {
     return theWindow ? : [UIApplication sharedApplication].keyWindow;
 }
@@ -261,7 +261,7 @@ HUDHelper * HUDIndicatorInWindow()
     return HUDIndicator(GetTheWindow());
 }
 
-void HUDHideWhen(BOOL animated, BOOL (^condition)(HUDHelper *hud))
+static void HUDHideWhen(BOOL animated, BOOL (^condition)(HUDHelper *hud))
 {
     NSSet *set = [allHUDs copy];
 
