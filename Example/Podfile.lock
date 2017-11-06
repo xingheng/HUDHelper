@@ -1,5 +1,5 @@
 PODS:
-  - HUDHelper (0.3.6):
+  - HUDHelper (0.3.7):
     - MBProgressHUD (~> 1.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  HUDHelper: 228a50ccdf699bfcef329474232d56d15a11531a
+  HUDHelper: 0428a87e9c760ba98f6a00c1fe915ec7a0a9245a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
 

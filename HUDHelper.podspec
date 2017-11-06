@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HUDHelper'
-  s.version          = '0.3.6'
+  s.version          = '0.3.7'
   s.summary          = 'A wrapper of method chaining for MBProgressHUD.'
 
   s.description      = <<-DESC
