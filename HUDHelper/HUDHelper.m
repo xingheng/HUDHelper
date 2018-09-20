@@ -22,6 +22,7 @@ static UIWindow * GetTheWindow(void);
 @property (nonatomic, assign) BOOL displayAnimated;
 @property (nonatomic, assign) NSTimeInterval delayInterval;
 @property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, assign) void *contextKey;
 
 @end
 
@@ -185,9 +186,17 @@ static UIWindow * GetTheWindow(void);
 - (HUDHelper *(^)(UIView *))setCustomView
 {
     return ^id (UIView *customView) {
-               self.mode = MBProgressHUDModeCustomView;
-               self.customView = customView;
-               return self;
+        self.mode = MBProgressHUDModeCustomView;
+        self.customView = customView;
+        return self;
+    };
+}
+
+- (HUDHelper *(^)(void *))context
+{
+    return ^id (void *context) {
+        self.contextKey = context;
+        return self;
     };
 }
 
