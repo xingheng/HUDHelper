@@ -15,8 +15,12 @@ typedef void (*HUDHelperConfigurationHandler)(HUDHelper *);
 typedef void (^HUDHelperConfigurationBlock)(HUDHelper *);
 typedef void (^HUDHelperButtonActionBlock)(UIButton *);
 
+typedef void * const HUDHelperContextKey;
+
 
 @interface HUDHelper : MBProgressHUD
+
+@property (nonatomic, assign, readonly) HUDHelperContextKey contextKey;
 
 - (HUDHelper *(^)(void))show;
 
@@ -48,7 +52,7 @@ typedef void (^HUDHelperButtonActionBlock)(UIButton *);
 
 - (HUDHelper *(^)(UIView *))setCustomView;
 
-- (HUDHelper *(^)(void *))context;
+- (HUDHelper *(^)(HUDHelperContextKey))context;
 
 - (HUDHelper *(^)(HUDHelperConfigurationBlock))customConfiguration;
 

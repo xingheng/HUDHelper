@@ -22,7 +22,7 @@ static UIWindow * GetTheWindow(void);
 @property (nonatomic, assign) BOOL displayAnimated;
 @property (nonatomic, assign) NSTimeInterval delayInterval;
 @property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, assign) void *contextKey;
+@property (nonatomic, assign) HUDHelperContextKey contextKey;
 
 @end
 
@@ -192,9 +192,9 @@ static UIWindow * GetTheWindow(void);
     };
 }
 
-- (HUDHelper *(^)(void *))context
+- (HUDHelper *(^)(HUDHelperContextKey))context
 {
-    return ^id (void *context) {
+    return ^id (HUDHelperContextKey context) {
         self.contextKey = context;
         return self;
     };
