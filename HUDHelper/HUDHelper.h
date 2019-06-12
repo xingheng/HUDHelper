@@ -38,11 +38,11 @@ typedef void * const HUDHelperContextKey;
 
 - (HUDHelper *(^)(UIColor *))titleColor;
 
-- (HUDHelper *(^)(NSString *))subTitle;
+- (HUDHelper *(^)(NSString *))subtitle;
 
-- (HUDHelper *(^)(UIFont *))subTitleFont;
+- (HUDHelper *(^)(UIFont *))subtitleFont;
 
-- (HUDHelper *(^)(UIColor *))subTitleColor;
+- (HUDHelper *(^)(UIColor *))subtitleColor;
 
 - (HUDHelper *(^)(BOOL))interactionEnabled;
 

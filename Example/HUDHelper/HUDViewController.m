@@ -55,7 +55,7 @@ void CustomHUDConfigurationHandler(MBProgressHUD *hud)
     NSTimeInterval delay = 3;
     NSString *strSubTitle = [NSString stringWithFormat:@"The toast will dismiss automatically after %.0f second(s).", delay];
 
-    HUDToast(self.view).title(@"Got response successfully!").subTitle(strSubTitle).delay(delay).customConfiguration(^(MBProgressHUD *hud) {
+    HUDToast(self.view).title(@"Got response successfully!").subtitle(strSubTitle).delay(delay).customConfiguration(^(MBProgressHUD *hud) {
         hud.bezelView.color = [[UIColor colorWithRed:arc4random_uniform(255) / 255.0f
                                                green:arc4random_uniform(255) / 255.0f
                                                 blue:arc4random_uniform(255) / 255.0f
@@ -66,7 +66,7 @@ void CustomHUDConfigurationHandler(MBProgressHUD *hud)
 
 - (void)btnIndicatorTapped:(id)sender
 {
-    HUDIndicator(self.view).title(@"Processing").subTitle(@"The indicator won't dismiss automatically, you should hide it manually. (At this time, it will dismiss when the dummy network request finished.)").show().actionButton(^(UIButton *button) {
+    HUDIndicator(self.view).title(@"Processing").subtitle(@"The indicator won't dismiss automatically, you should hide it manually. (At this time, it will dismiss when the dummy network request finished.)").show().actionButton(^(UIButton *button) {
         [button setTitle:@"Dismiss" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(hudActionButtonTapped:) forControlEvents:UIControlEventAllEvents];
     });

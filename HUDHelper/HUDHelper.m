@@ -129,27 +129,27 @@ static UIWindow * GetTheWindow(void);
     };
 }
 
-- (HUDHelper *(^)(NSString *))subTitle
+- (HUDHelper *(^)(NSString *))subtitle
 {
-    return ^id (NSString *subTitle) {
-               self.detailsLabel.text = subTitle;
+    return ^id (NSString *subtitle) {
+               self.detailsLabel.text = subtitle;
                self.mode = self.isIndicator ? MBProgressHUDModeIndeterminate : MBProgressHUDModeText;
                return self;
     };
 }
 
-- (HUDHelper *(^)(UIFont *))subTitleFont
+- (HUDHelper *(^)(UIFont *))subtitleFont
 {
-    return ^id (UIFont *subTitleFont) {
-               self.detailsLabel.font = subTitleFont;
+    return ^id (UIFont *subtitleFont) {
+               self.detailsLabel.font = subtitleFont;
                return self;
     };
 }
 
-- (HUDHelper *(^)(UIColor *))subTitleColor
+- (HUDHelper *(^)(UIColor *))subtitleColor
 {
-    return ^id (UIColor *subTitleColor) {
-               self.detailsLabel.textColor = subTitleColor;
+    return ^id (UIColor *subtitleColor) {
+               self.detailsLabel.textColor = subtitleColor;
                return self;
     };
 }
