@@ -186,17 +186,17 @@ static UIWindow * GetTheWindow(void);
 - (HUDHelper *(^)(UIView *))setCustomView
 {
     return ^id (UIView *customView) {
-        self.mode = MBProgressHUDModeCustomView;
-        self.customView = customView;
-        return self;
+               self.mode = MBProgressHUDModeCustomView;
+               self.customView = customView;
+               return self;
     };
 }
 
 - (HUDHelper *(^)(HUDHelperContextKey))context
 {
     return ^id (HUDHelperContextKey context) {
-        self.contextKey = context;
-        return self;
+               self.contextKey = context;
+               return self;
     };
 }
 

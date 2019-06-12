@@ -63,7 +63,7 @@
 		9D618F3E1E50242ADFA27C31 /* libPods-HUDHelper_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HUDHelper_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8DBD9F019AC037351053B1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B89697300BAF0ED9549988CA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		BE69B037950EB5108CA89728 /* HUDHelper.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HUDHelper.podspec; path = ../HUDHelper.podspec; sourceTree = "<group>"; };
+		BE69B037950EB5108CA89728 /* HUDHelper.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HUDHelper.podspec; path = ../HUDHelper.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D43A63EB360C5A3A655AE0A1 /* libPods-HUDHelper_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HUDHelper_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -253,6 +253,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

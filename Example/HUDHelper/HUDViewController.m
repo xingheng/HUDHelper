@@ -8,7 +8,7 @@
 
 #import "HUDViewController.h"
 
-void CustomHUDConfigurationHandler(MBProgressHUD *hud)
+void CustomHUDConfigurationHandler(HUDHelper *hud)
 {
     hud.bezelView.color = [[UIColor grayColor] colorWithAlphaComponent:0.8];
     hud.backgroundView.color = [[UIColor grayColor] colorWithAlphaComponent:0.2];
