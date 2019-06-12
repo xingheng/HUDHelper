@@ -40,10 +40,6 @@ static UIWindow * GetTheWindow(void);
     if (self = [super initWithFrame:frame]) {
         self.userInteractionEnabled = NO;
         self.displayAnimated = YES;
-
-        if (hudConfigurationHandler) {
-            hudConfigurationHandler(self);
-        }
     }
 
     return self;
@@ -55,6 +51,10 @@ static UIWindow * GetTheWindow(void);
                self.removeFromSuperViewOnHide = YES;
                [self.containerView addSubview:self];
                [self showAnimated:self.displayAnimated];
+
+               if (hudConfigurationHandler) {
+                   hudConfigurationHandler(self);
+               }
 
                [allHUDs addObject:self];
 
