@@ -65,15 +65,21 @@ void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler, UIWindow
 
 HUDHelper * HUDToast(UIView *view);
 
+HUDHelper * HUDToastInView(UIView *view);
+
 HUDHelper * HUDToastInWindow(void);
 
 HUDHelper * HUDIndicator(UIView *view);
 
 HUDHelper * HUDIndicatorInWindow(void);
 
-void HUDHide(UIView *view);
+void HUDHide(HUDHelper *hud);
 
-void HUDHideAnimated(UIView *view, BOOL animated);
+void HUDHideAnimated(HUDHelper *hud, BOOL animated);
+
+void HUDHideInView(UIView *view);
+
+void HUDHideInViewAnimated(UIView *view, BOOL animated);
 
 void HUDHideInWindowAnimated(BOOL animated);
 

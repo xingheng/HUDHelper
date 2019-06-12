@@ -281,21 +281,33 @@ static void HUDHideWhen(BOOL animated, BOOL (^condition)(HUDHelper *hud))
     }
 }
 
-void HUDHideAnimated(UIView *view, BOOL animated)
+void HUDHideInViewAnimated(UIView *view, BOOL animated)
 {
     HUDHideWhen(animated, ^BOOL (HUDHelper *hud) {
         return [hud.superview isEqual:view];
     });
 }
 
-void HUDHide(UIView *view)
+void HUDHide(HUDHelper *hud)
 {
-    HUDHideAnimated(view, YES);
+    HUDHideAnimated(hud, YES);
+}
+
+void HUDHideAnimated(HUDHelper *hud, BOOL animated)
+{
+    HUDHideWhen(animated, ^BOOL(HUDHelper *h) {
+        return [hud isEqual:h];
+    });
+}
+
+void HUDHideInView(UIView *view)
+{
+    HUDHideInViewAnimated(view, YES);
 }
 
 void HUDHideInWindowAnimated(BOOL animated)
 {
-    HUDHideAnimated(GetTheWindow(), animated);
+    HUDHideInViewAnimated(GetTheWindow(), animated);
 }
 
 void HUDHideInWindow()
