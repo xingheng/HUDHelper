@@ -1,8 +1,9 @@
-platform :ios, '8.0'
+platform :ios, '14.0'
 
 target 'HUDHelper_Example' do
   pod 'HUDHelper', :path => '../'
   pod 'Masonry'
+  pod 'CordialUtility'
 
   target 'HUDHelper_Tests' do
     inherit! :search_paths

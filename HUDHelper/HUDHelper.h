@@ -1,92 +1,141 @@
 //
 //  HUDHelper.h
-//  DragonSourceCommon
 //
 //  Created by WeiHan on 1/29/16.
-//  Copyright © 2016 DragonSource. All rights reserved.
+//  Copyright © 2016-2021 Wei Han. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class HUDHelper;
 
-typedef void (*HUDHelperConfigurationHandler)(HUDHelper *);
-typedef void (^HUDHelperConfigurationBlock)(HUDHelper *);
-typedef void (^HUDHelperButtonActionBlock)(UIButton *);
-
-typedef void *const HUDHelperContextKey;
+typedef __weak id HUDHelperContext;
+typedef void (^HUDHelperConfiguration)(HUDHelper *hud);
 
 
-@interface HUDHelper : MBProgressHUD
+@interface HUDHelperPreferences : NSObject
 
-@property (nonatomic, assign, readonly) HUDHelperContextKey contextKey;
+/// Window as HUD container used to show.
+@property (nonatomic, strong) UIWindow *window;
 
-- (HUDHelper *(^)(void))show;
+/// User reading rate, used to control the toast's show time according the total length
+/// of main title text and secondary title text.
+/// Defaults to 0 means do nothing.
+@property (nonatomic, assign) CGFloat readingRate;
 
-- (HUDHelper *(^)(void))hide;
+/// Whether allow multiple HUDs could be attached to a same UIView or not.
+/// Defaults to YES.
+@property (nonatomic, assign) BOOL allowMultipleHUDsInSameView;
 
-- (HUDHelper *(^)(BOOL))animation;
-
-- (HUDHelper *(^)(NSTimeInterval))delay;
-
-- (HUDHelper *(^)(MBProgressHUDCompletionBlock))completion;
-
-- (HUDHelper *(^)(NSString *))title;
-
-- (HUDHelper *(^)(UIFont *))titleFont;
-
-- (HUDHelper *(^)(UIColor *))titleColor;
-
-- (HUDHelper *(^)(NSString *))subtitle;
-
-- (HUDHelper *(^)(UIFont *))subtitleFont;
-
-- (HUDHelper *(^)(UIColor *))subtitleColor;
-
-- (HUDHelper *(^)(BOOL))interactionEnabled;
-
-- (HUDHelper *(^)(MBProgressHUDMode))setMode;
-
-- (HUDHelper *(^)(HUDHelperButtonActionBlock))actionButton;
-
-- (HUDHelper *(^)(UIView *))setCustomView;
-
-- (HUDHelper *(^)(HUDHelperContextKey))context;
-
-- (HUDHelper *(^)(HUDHelperConfigurationBlock))customConfiguration;
+/// HUD configuration for all instances when initializing.
+/// This block allow you to define your custom HUD features without inheriting.
+@property (nonatomic, copy) HUDHelperConfiguration configuration;
 
 @end
 
 
-#pragma mark - Helper Functions
+@interface HUDHelper : MBProgressHUD
 
-void SetupHUDHelperConfiguration(HUDHelperConfigurationHandler handler, UIWindow *containerWindow);
+/// The context when initializing.
+@property (nonatomic, weak, readonly) HUDHelperContext contextInfo;
 
-HUDHelper * HUDToast(UIView *view);
+@end
 
-HUDHelper * HUDToastInView(UIView *view);
 
-HUDHelper * HUDToastInWindow(void);
+@interface HUDHelper (Initializer)
 
-HUDHelper * HUDIndicator(UIView *view);
+/// HUD configuration for all the instances.
+@property (nonatomic, copy, class, null_resettable) HUDHelperPreferences *preferences;
 
-HUDHelper * HUDIndicatorInWindow(void);
+/// Initialize a toast with specified view.
++ (HUDHelper * (^)(UIView *))toast;
 
-void HUDHide(HUDHelper *hud);
+/// Initialize a toast with default window.
++ (HUDHelper * (^)(void))toastInWindow;
 
-void HUDHideAnimated(HUDHelper *hud, BOOL animated);
+/// Initialize an indicator with specified view.
++ (HUDHelper * (^)(UIView *))indicator;
 
-void HUDHideInView(UIView *view);
+/// Initialize an indicator with default window.
++ (HUDHelper * (^)(void))indicatorInWindow;
 
-void HUDHideInViewAnimated(UIView *view, BOOL animated);
+/// Return the latest HUD be shown.
++ (HUDHelper * (^)(UIView * _Nullable))lastest;
 
-void HUDHideInWindowAnimated(BOOL animated);
+@end
 
-void HUDHideInWindow(void);
 
-void HUDHideAllToasts(BOOL animated);
+@interface HUDHelper (Configuration)
 
-void HUDHideAllIndicators(BOOL animated);
+/// Completion block when HUD get dismissed.
+- (HUDHelper * (^)(MBProgressHUDCompletionBlock))completion;
 
-void HUDHideAll(BOOL animated);
+/// Main title text configuration.
+- (HUDHelper * (^)(NSString *))title;
+
+/// Main title font configuration.
+- (HUDHelper * (^)(UIFont *))titleFont;
+
+/// Main title foreground color configuration.
+- (HUDHelper * (^)(UIColor *))titleColor;
+
+/// Secondary title text configuration.
+- (HUDHelper * (^)(NSString *))subtitle;
+
+/// Secondary title font configuration.
+- (HUDHelper * (^)(UIFont *))subtitleFont;
+
+/// Secondary title foreground color configuration.
+- (HUDHelper * (^)(UIColor *))subtitleColor;
+
+/// Accept the user interaction or not for the whole HUD when displaying.
+- (HUDHelper * (^)(BOOL))interactionEnabled;
+
+/// Mode configuration from MBProgressHUD.
+- (HUDHelper * (^)(MBProgressHUDMode))setMode;
+
+/// Action button from MBProgressHUD configuration.
+- (HUDHelper * (^)(void (^)(UIButton *)))actionButton;
+
+/// Custom view from MBProgressHUD.
+- (HUDHelper * (^)(UIView *))setCustomView;
+
+/// HUD configuration for current instance.
+- (HUDHelper * (^)(HUDHelperConfiguration))configuration;
+
+/// Return the existing HUD which has the same context key defined before, otherwise,
+/// bind the context info to current receiving instance.
+///
+/// HUDHelper won't retain the context key inside.
+- (HUDHelper * (^)(HUDHelperContext))context;
+
+@end
+
+
+@interface HUDHelper (State)
+
+/// Use animation or not when `show` and `hide`.
+/// Defaults to YES.
+- (HUDHelper *(^)(BOOL))animation;
+
+/// Show specified time interval for toast instance only when calling `show` or `hide`.
+///
+/// For `show` method, it indicates the HUD's show duration, only used for toast.
+/// For `hide` method, it indicates the HUD delay duration to hide, only used for indicator.
+- (HUDHelper * (^)(NSTimeInterval))interval;
+
+/// Show HUD immediately.
+- (HUDHelper * (^)(void))show;
+
+/// Hide HUD immediately.
+- (HUDHelper * (^)(void))hide;
+
+/// Hide all the indicator instances with animation.
++ (void (^)(BOOL))hideAll;
+
+@end
+
+NS_ASSUME_NONNULL_END

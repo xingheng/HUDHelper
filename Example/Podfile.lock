@@ -1,15 +1,46 @@
 PODS:
-  - HUDHelper (0.4.0):
+  - CordialUtility (1.0.0):
+    - CordialUtility/All (= 1.0.0)
+  - CordialUtility/All (1.0.0):
+    - CordialUtility/Application
+    - CordialUtility/CollectionView
+    - CordialUtility/Core
+    - CordialUtility/CustomView
+    - CordialUtility/Date
+    - CordialUtility/Image
+    - CordialUtility/LayoutConstraint
+    - CordialUtility/Path
+    - CordialUtility/String
+    - CordialUtility/TableView
+    - CordialUtility/View
+    - CordialUtility/ViewController
+  - CordialUtility/Application (1.0.0)
+  - CordialUtility/CollectionView (1.0.0)
+  - CordialUtility/Core (1.0.0)
+  - CordialUtility/CustomView (1.0.0):
+    - CordialUtility/Core
+  - CordialUtility/Date (1.0.0)
+  - CordialUtility/Image (1.0.0)
+  - CordialUtility/LayoutConstraint (1.0.0):
+    - Masonry
+  - CordialUtility/Path (1.0.0)
+  - CordialUtility/String (1.0.0)
+  - CordialUtility/TableView (1.0.0)
+  - CordialUtility/View (1.0.0)
+  - CordialUtility/ViewController (1.0.0)
+  - HUDHelper (0.5.0):
     - MBProgressHUD (~> 1.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
 
 DEPENDENCIES:
+  - CordialUtility
   - HUDHelper (from `../`)
   - Masonry
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
+    - CordialUtility
     - Masonry
     - MBProgressHUD
 
@@ -18,10 +49,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HUDHelper: 3f6c91e048b9c244caaaa13c6ef52fc969f01956
+  CordialUtility: 5139f0cee0b6e15b4fac566d125c42da8cb91a74
+  HUDHelper: 9e8f3df1ea248a9ded6c847947eb8638c9afbfb5
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
 
-PODFILE CHECKSUM: fb76ca702fa73ffcfaacfa102eb4a3cddb36bb2f
+PODFILE CHECKSUM: 185a3ca8c22a8f2aea9fd0066a15a007465a0d0e
 
-COCOAPODS: 1.7.1
+COCOAPODS: 1.10.0

@@ -13,7 +13,6 @@ Pod::Spec.new do |s|
 
   s.description      = <<-DESC
 HUDHelper defines 'Indicator' and 'Toast' based on MBProgressHUD, the indicator acts as the default behaviour of MBProgressHUD, the toast will hide automatically.
-The original intention of this wrapper is to separate the MBProgressHUD usage from UIViewController and call it easily.
                        DESC
 
   s.homepage         = 'https://github.com/xingheng/HUDHelper'
