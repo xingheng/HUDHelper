@@ -28,7 +28,7 @@ PODS:
   - CordialUtility/TableView (1.0.0)
   - CordialUtility/View (1.0.0)
   - CordialUtility/ViewController (1.0.0)
-  - HUDHelper (0.5.0):
+  - HUDHelper (0.5.1):
     - MBProgressHUD (~> 1.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
@@ -50,7 +50,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CordialUtility: 5139f0cee0b6e15b4fac566d125c42da8cb91a74
-  HUDHelper: 9e8f3df1ea248a9ded6c847947eb8638c9afbfb5
+  HUDHelper: b16d018a4b895bae4bb84f778a1caf0e9a4b6187
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
 
