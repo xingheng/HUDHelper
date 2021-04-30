@@ -50,7 +50,7 @@ static HUDHelperPreferences *currentPreferences;
 
 @interface HUDHelper () <MBProgressHUDDelegate>
 
-@property (nonatomic, weak) UIView *containerView;
+@property (nonatomic, weak) UIView *m_containerView;
 @property (nonatomic, weak) HUDHelperContext m_context;
 
 @property (nonatomic, assign) BOOL m_isIndicator;
@@ -76,10 +76,10 @@ static HUDHelperPreferences *currentPreferences;
         self.userInteractionEnabled = NO;
         self.removeFromSuperViewOnHide = YES;
         self.m_animation = YES;
-        self.containerView = view;
+        self.m_containerView = view;
 
-        if (currentPreferences.configuration) {
-            currentPreferences.configuration(self);
+        if (self.class.preferences.configuration) {
+            self.class.preferences.configuration(self);
         }
     }
 
@@ -88,11 +88,11 @@ static HUDHelperPreferences *currentPreferences;
 
 #pragma mark - Property
 
-- (void)setContainerView:(UIView *)containerView
+- (void)setm_containerView:(UIView *)m_containerView
 {
-    _containerView = containerView;
+    _m_containerView = m_containerView;
 
-    [containerView.HUDs addObject:self];
+    [m_containerView.HUDs addObject:self];
 }
 
 - (HUDHelperContext)contextInfo
@@ -111,6 +111,27 @@ static HUDHelperPreferences *currentPreferences;
 {
     [allHUDs removeObject:self];
     [super removeFromSuperview];
+}
+
+#pragma mark - Private
+
++ (HUDHelper *)_HUDInView:(UIView *)view match:(BOOL (^)(HUDHelper *))block
+{
+    for (HUDHelper *hud in view.HUDs) {
+        if (![hud isKindOfClass:self]) {
+            continue;
+        }
+
+        if (block) {
+            if (block(hud)) {
+                return hud;
+            }
+        }
+
+        return hud;
+    }
+
+    return nil;
 }
 
 #pragma mark - MBProgressHUDDelegate
@@ -147,6 +168,16 @@ static HUDHelperPreferences *currentPreferences;
 + (HUDHelper * (^)(UIView *))toast
 {
     return ^id (UIView *view) {
+        if (!self.preferences.allowMultipleHUDsInSameView) {
+            HUDHelper *hud = [self _HUDInView:view match:^BOOL(HUDHelper *hud) {
+                return !hud.m_isIndicator;
+            }];
+
+            if (hud) {
+                return hud;
+            }
+        }
+
         return [[self alloc] initWithView:view];
     };
 }
@@ -154,13 +185,23 @@ static HUDHelperPreferences *currentPreferences;
 + (HUDHelper * (^)(void))toastInWindow
 {
     return ^id {
-        return [[self alloc] initWithView:currentPreferences.window];
+        return self.toast(self.preferences.window);
     };
 }
 
 + (HUDHelper * (^)(UIView *))indicator
 {
     return ^id (UIView *view) {
+        if (!self.preferences.allowMultipleHUDsInSameView) {
+            HUDHelper *hud = [self _HUDInView:view match:^BOOL(HUDHelper *hud) {
+                return hud.m_isIndicator;
+            }];
+
+            if (hud) {
+                return hud;
+            }
+        }
+
         HUDHelper *hud = [[self alloc] initWithView:view];
 
         hud.m_isIndicator = YES;
@@ -168,26 +209,18 @@ static HUDHelperPreferences *currentPreferences;
     };
 }
 
-+ (HUDHelper * (^)(UIView *))lastest
-{
-    return ^id (UIView *view) {
-        HUDHelper *hud = nil;
-
-        if (view) {
-            hud = (HUDHelper *)[self HUDForView:view];
-        }
-
-        return hud ? : allHUDs.lastObject ? : self.reservedHUD;
-    };
-}
-
 + (HUDHelper * (^)(void))indicatorInWindow
 {
     return ^id {
-        HUDHelper *hud = [[self alloc] initWithView:currentPreferences.window];
+        return self.indicator(self.preferences.window);
+    };
+}
 
-        hud.m_isIndicator = YES;
-        return hud;
++ (HUDHelper * (^)(UIView *))lastest
+{
+    return ^id (UIView *view) {
+        HUDHelper *hud = [self _HUDInView:view match:nil];
+        return hud ? : allHUDs.lastObject ? : self.reservedHUD;
     };
 }
 
@@ -345,16 +378,17 @@ static HUDHelperPreferences *currentPreferences;
 - (HUDHelper *(^)(void))show
 {
     return ^id () {
-        [self.containerView addSubview:self];
+        [self.m_containerView addSubview:self];
         [self showAnimated:self.m_animation];
 
         [allHUDs addObject:self];
 
         if (!self.m_isIndicator) {
             NSTimeInterval interval = self.m_interval;
+            CGFloat rate = self.class.preferences.readingRate;
 
-            if (interval <= 0 && currentPreferences.readingRate > 0) {
-                interval = (self.label.text.length + self.detailsLabel.text.length) * currentPreferences.readingRate;
+            if (interval <= 0 && rate > 0) {
+                interval = (self.label.text.length + self.detailsLabel.text.length) * rate;
             }
 
             [self hideAnimated:self.m_animation afterDelay:interval];

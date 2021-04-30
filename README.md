@@ -94,6 +94,8 @@ Or if want to hide all the HUDs directly:
 HUDHelper.hideAll(YES);
 ```
 
+Find more settings from documentation in source code.
+
 
 
 ## Example
